@@ -1,1 +1,288 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>বিলপাড়া বাড়ি জামে মসজিদ</title>
+  <meta name="description" content="বিলপাড়া বাড়ি জামে মসজিদ — নামাজের সময়সূচি, নোটিশ, অনুদান এবং লোকেশন।" />
 
+  <meta property="og:title" content="বিলপাড়া বাড়ি জামে মসজিদ" />
+  <meta property="og:description" content="নামাজের সময়সূচি, নোটিশ, অনুদান এবং লোকেশন।" />
+  <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="./style.css" />
+  <script defer src="./script.js"></script>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="brand">
+        <div class="brand__mark" aria-hidden="true">🕌</div>
+        <div class="brand__text">
+          <div class="brand__name">বিলপাড়া বাড়ি জামে মসজিদ</div>
+          <div class="brand__meta">কিশোরগঞ্জ সদর, কিশোরগঞ্জ</div>
+        </div>
+      </div>
+
+      <button class="navbtn" id="navBtn" aria-expanded="false" aria-controls="navMenu">
+        মেনু
+      </button>
+
+      <nav class="nav" id="navMenu">
+        <a href="#prayer">নামাজের সময়</a>
+        <a href="#notice">নোটিশ</a>
+        <a href="#donate">অনুদান</a>
+        <a href="#gallery">গ্যালারি</a>
+        <a href="#location">লোকেশন</a>
+        <a href="#contact">যোগাযোগ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="pill">আহলান ওয়া সাহলান</p>
+          <h1>বিলপাড়া বাড়ি জামে মসজিদ</h1>
+          <p class="lead">
+            নামাজের সময়সূচি, গুরুত্বপূর্ণ নোটিশ, অনুদান তথ্য এবং গুগল ম্যাপ লোকেশন একসাথে।
+          </p>
+
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#prayer">আজকের সময়সূচি</a>
+            <a class="btn btn--ghost" href="#location">ম্যাপে দেখুন</a>
+          </div>
+
+          <div class="mini">
+            <div class="mini__card">
+              <div class="mini__label">আজ (লোকেশন ভিত্তিক)</div>
+              <div class="mini__value" id="todayDate">—</div>
+            </div>
+            <div class="mini__card">
+              <div class="mini__label">সেহরি/ইফতার</div>
+              <div class="mini__value">ঐচ্ছিক (পরবর্তীতে যোগ করা যাবে)</div>
+            </div>
+            <div class="mini__card">
+              <div class="mini__label">জুম্মার সময়</div>
+              <div class="mini__value">১:৩০ (আপনি বদলাতে পারবেন)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__panel">
+          <div class="panel">
+            <div class="panel__head">
+              <h2 class="panel__title">নামাজের সময় (আজ)</h2>
+              <div class="panel__actions">
+                <select id="timeSource" class="select" aria-label="Prayer time source">
+                  <option value="address" selected>Kishoreganj (API)</option>
+                  <option value="manual">ম্যানুয়াল (নিজে লিখব)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="tableWrap">
+              <table class="table" aria-label="Prayer times">
+                <thead>
+                  <tr>
+                    <th>ওয়াক্ত</th>
+                    <th>সময়</th>
+                  </tr>
+                </thead>
+                <tbody id="prayerTable">
+                  <tr><td>ফজর</td><td>লোড হচ্ছে…</td></tr>
+                  <tr><td>যোহর</td><td>লোড হচ্ছে…</td></tr>
+                  <tr><td>আসর</td><td>লোড হচ্ছে…</td></tr>
+                  <tr><td>মাগরিব</td><td>লোড হচ্ছে…</td></tr>
+                  <tr><td>ইশা</td><td>লোড হচ্ছে…</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="hint" id="ptHint">
+              নোট: সময়গুলো API থেকে আসে—ভিন্ন পদ্ধতি/লোকেশন অনুযায়ী সামান্য পার্থক্য হতে পারে।
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="prayer">
+      <div class="container">
+        <div class="section__head">
+          <h2>নামাজের সময়সূচি</h2>
+          <p>আপনি চাইলে API বা ম্যানুয়াল—দুইভাবেই চালাতে পারবেন।</p>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>ম্যানুয়াল সময় (আপনার মসজিদের নোটিশ অনুযায়ী)</h3>
+            <p class="muted">
+              API না চাইলে <b>script.js</b> এ “manualTimings” এ নিজের সময় বসিয়ে দিন।
+            </p>
+            <ul class="list">
+              <li>জুম্মা: ১:৩০ (উদাহরণ)</li>
+              <li>ফজর জামাত: ৫:১৫ (উদাহরণ)</li>
+              <li>…</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>API সময় (লোকেশন ভিত্তিক)</h3>
+            <p class="muted">
+              Kishoreganj, Bangladesh address দিয়ে সময় আনছে। চাইলে আপনার নির্দিষ্ট ঠিকানা/কোঅর্ডিনেট বসানো যাবে।
+            </p>
+            <div class="chips">
+              <span class="chip">ফ্রি</span>
+              <span class="chip">অটো আপডেট</span>
+              <span class="chip">মোবাইল ফ্রেন্ডলি</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="notice">
+      <div class="container">
+        <div class="section__head">
+          <h2>নোটিশ বোর্ড</h2>
+          <p>মসজিদের ঘোষণা/দাওয়াত/মিটিং—এখানে আপডেট করতে পারবেন।</p>
+        </div>
+
+        <div class="notices" id="noticeList" aria-live="polite"></div>
+        <p class="hint">নোটিশ যোগ/এডিট: <b>script.js</b> ফাইলে “notices” লিস্টে লিখলেই হবে।</p>
+      </div>
+    </section>
+
+    <section class="section" id="donate">
+      <div class="container">
+        <div class="section__head">
+          <h2>অনুদান</h2>
+          <p>মসজিদ উন্নয়ন/বিদ্যুৎ/পানির বিল—স্বচ্ছতার সাথে তথ্য দিন।</p>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>অনুদান তথ্য (ঐচ্ছিক)</h3>
+            <p class="muted">ব্যক্তিগত নম্বর না দিয়ে কমিটির অফিসিয়াল নম্বর/পেমেন্ট তথ্য দিন (অনুমতি থাকলে)।</p>
+
+            <div class="kv">
+              <div class="kv__row"><div class="kv__k">bKash</div><div class="kv__v">এখানে নম্বর বসান</div></div>
+              <div class="kv__row"><div class="kv__k">Nagad</div><div class="kv__v">এখানে নম্বর বসান</div></div>
+              <div class="kv__row"><div class="kv__k">Bank</div><div class="kv__v">এখানে অ্যাকাউন্ট তথ্য বসান</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>ট্রান্সপারেন্সি নোট</h3>
+            <ul class="list">
+              <li>মাসিক হিসাবের ছবি/পিডিএফ পরে আপলোড করা যাবে</li>
+              <li>কাজের অগ্রগতি গ্যালারিতে দেখাতে পারবেন</li>
+              <li>প্রয়োজনে “রিসিপ্ট/ফান্ড রিপোর্ট” পেজ যোগ করা যাবে</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="gallery">
+      <div class="container">
+        <div class="section__head">
+          <h2>গ্যালারি</h2>
+          <p>মসজিদের ছবি দিন—গেট/সাইনবোর্ড/ভিতরের অংশ ইত্যাদি।</p>
+        </div>
+
+        <div class="gallery">
+          <!-- আপনার ছবি দিন: /assets/photo1.jpg ইত্যাদি -->
+          <figure class="shot">
+            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=60" alt="Mosque photo placeholder" />
+            <figcaption>Placeholder (আপনার ছবি বসান)</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=60" alt="Mosque photo placeholder" />
+            <figcaption>Placeholder (আপনার ছবি বসান)</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1200&q=60" alt="Mosque photo placeholder" />
+            <figcaption>Placeholder (আপনার ছবি বসান)</figcaption>
+          </figure>
+        </div>
+
+        <p class="hint">নিজের ছবি দিলে: Repo তে <b>assets</b> ফোল্ডার বানিয়ে ছবি আপলোড করুন, তারপর এখানে লিংক বদলান।</p>
+      </div>
+    </section>
+
+    <section class="section" id="location">
+      <div class="container">
+        <div class="section__head">
+          <h2>লোকেশন (Google Maps)</h2>
+          <p>এখানে আপনার মসজিদের ম্যাপ এমবেড দিন।</p>
+        </div>
+
+        <div class="map card">
+          <!-- Google Maps -> Share -> Embed a map -> iframe src কপি করে নিচে বসান -->
+          <iframe
+            title="Bilpara Bari Jame Masjid location"
+            src="PUT_YOUR_GOOGLE_MAP_EMBED_URL_HERE"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <p class="hint">
+          ম্যাপ এমবেড: Google Maps → মসজিদ → <b>Share</b> → <b>Embed a map</b> → iframe এর <b>src</b> কপি করে এখানে বসান।
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="contact">
+      <div class="container">
+        <div class="section__head">
+          <h2>যোগাযোগ</h2>
+          <p>কমিটির অফিসিয়াল নম্বর/ইমেইল চাইলে দিন।</p>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>তথ্য</h3>
+            <div class="kv">
+              <div class="kv__row"><div class="kv__k">ঠিকানা</div><div class="kv__v">বিলপাড়া বাড়ি, কিশোরগঞ্জ সদর, কিশোরগঞ্জ</div></div>
+              <div class="kv__row"><div class="kv__k">ফোন</div><div class="kv__v">ঐচ্ছিক (অফিসিয়াল হলে দিন)</div></div>
+              <div class="kv__row"><div class="kv__k">ইমেইল</div><div class="kv__v">ঐচ্ছিক</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>মেসেজ ফর্ম (ফ্রি)</h3>
+            <p class="muted">
+              Google Form বানিয়ে এখানে Embed করলে “Contact form” ফ্রি হয়ে যাবে।
+            </p>
+            <ol class="list">
+              <li>forms.google.com → New Form</li>
+              <li>Send → <> Embed</li>
+              <li>iframe কোড কপি করে এখানে বসান</li>
+            </ol>
+
+            <!-- চাইলে এখানে Google Form iframe বসাবেন -->
+            <!-- <iframe src="PUT_GOOGLE_FORM_EMBED_URL_HERE" height="520"></iframe> -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <div class="footer__title">বিলপাড়া বাড়ি জামে মসজিদ</div>
+        <div class="footer__meta">© <span id="year"></span> — Kishoreganj, Bangladesh</div>
+      </div>
+      <div class="footer__meta">Built with GitHub Pages (Free)</div>
+    </div>
+  </footer>
+</body>
+</html>
